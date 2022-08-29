@@ -1,3 +1,9 @@
+# STEP
+1. clone the project above
+2. note .env is already available
+3. run yarn install, after node_modules has been installed
+4. run yarn start
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
