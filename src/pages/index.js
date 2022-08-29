@@ -1,12 +1,14 @@
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
 import { baseUrl, typeColor } from "../helpers";
+import { Search } from './search'
 
 const Index = () => {
   const [getLimit] = useState(20);
   const [getOffset] = useState(0);
   const [getUrlNext, setUrlNext] = useState("");
   const [getDetail, setDetail] = useState([]);
+  const [getSearch, setSearch] = useState("");
   const { REACT_APP_API_URL } = process.env || {};
 
   const getDetailDataNext = async (res) => {
@@ -43,11 +45,17 @@ const Index = () => {
       Math.ceil(window.innerHeight + window.scrollY) >=
       document.documentElement.scrollHeight;
     if (bottom) {
-      setTimeout(() => {
-        loadMore();        
-      }, 500);
+      loadMore();
     }
   }, [loadMore]);
+
+  const handleSearch = () => {
+    axios.get(REACT_APP_API_URL + 'pokemon/' + getSearch).then(({data: res}) => {
+      if (res) {
+        setDetail([res])
+      }
+    });
+  }
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, {
@@ -70,6 +78,18 @@ const Index = () => {
       });
   }, [REACT_APP_API_URL, getLimit, getOffset]);
 
+  useEffect(() => {
+    if( getSearch !== '' ) {
+      setTimeout(() => {
+        axios.get(REACT_APP_API_URL + 'pokemon/' + getSearch).then(({data: res}) => {
+          if (res) {
+            setDetail([res])
+          }
+        })
+      }, 500);
+    }
+  }, [REACT_APP_API_URL, getSearch])
+
   return (
     <>
       <div className="container pt-3">
@@ -87,16 +107,13 @@ const Index = () => {
             <div className="row mt-3">
               <div className="col-lg-2 col-md-12 col-sm-12 ">&nbsp;</div>
               <div className="col-lg-6 col-md-10 col-sm-9 col-7">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Search Pokemon"
-                />
+                <Search onSelected={setSearch} />
               </div>
               <div className="col-lg-2 col-md-2 col-sm-3 col-5">
                 <button
                   type="button"
                   className="btn btn-sm btn-warning btn-block btn-primary-color btn-search"
+                  onClick={handleSearch}
                 >
                   <i className="fa fa-search"></i>&nbsp; Search
                 </button>
