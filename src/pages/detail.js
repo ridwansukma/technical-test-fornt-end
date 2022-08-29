@@ -15,9 +15,6 @@ const Detail = ({ show, setShow, getDetailModal }) => {
 
   const handleClose = () => setShow(false);
 
-  console.log("getData", getData);
-  console.log("getDataDetail", getDataDetail);
-  console.log("getDetailEvolution", getDetailEvolution);
   useEffect(() => {
     if (Object.keys(getDetailModal).length > 0) {
       setData(getDetailModal);
@@ -88,7 +85,7 @@ const Detail = ({ show, setShow, getDetailModal }) => {
         .get(
           REACT_APP_API_URL +
             "pokemon/" +
-            (getDetailEvolution.chain.evolves_to !== undefined
+            (getDetailEvolution.chain.evolves_to[0] !== undefined
               ? getDetailEvolution.chain.evolves_to[0].evolves_to[0] !==
                 undefined
                 ? getDetailEvolution.chain.evolves_to[0].evolves_to[0].species
