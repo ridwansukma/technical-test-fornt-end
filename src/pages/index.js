@@ -85,7 +85,7 @@ const Index = () => {
   };
 
   const handleDetail = (name) => {
-    if (name !== '') {
+    if (name !== "") {
       axios
         .get(REACT_APP_API_URL + "pokemon/" + name)
         .then(({ data: res }) => {
@@ -136,7 +136,6 @@ const Index = () => {
   }, [REACT_APP_API_URL, getSearch, getLimit, getOffset]);
 
   const getDetailDataFilter = async (res, type, url) => {
-    console.log("res", res);
     const posts = res.map((item) => {
       let params =
         type === "pokemon-color" ||
@@ -152,7 +151,6 @@ const Index = () => {
       );
     });
 
-    console.log("posts", posts);
     Promise.all(posts).then((res) => {
       let dataRes = [];
       res.forEach((item) => {
@@ -160,13 +158,11 @@ const Index = () => {
           dataRes.push(item);
         }
       });
-      console.log("dataRes", dataRes);
       setDetail(dataRes);
     });
   };
 
   useEffect(() => {
-    console.log("getUrlFilter", getUrlFilter.params);
     if (getUrlFilter.url !== "") {
       axios
         .get(
@@ -176,7 +172,6 @@ const Index = () => {
             (getUrlFilter.params || "")
         )
         .then(({ data }) => {
-          console.log("data", data);
           if (
             getUrlFilter.url === "pokemon-color" ||
             getUrlFilter.url === "pokemon-shape" ||
@@ -277,6 +272,7 @@ const Index = () => {
                                   float: "left",
                                   margin: "0px 1.5%",
                                   fontWeight: 600,
+                                  textAlign: "center",
                                 }}
                               >
                                 {arr.type.name}
@@ -337,7 +333,11 @@ const Index = () => {
       </div>
 
       <Filter show={show} setShow={setShow} setUrlFilter={setUrlFilter} />
-      <Detail show={showDetail} setShow={setShowDetail} getDetailModal={getDetailModal}/>
+      <Detail
+        show={showDetail}
+        setShow={setShowDetail}
+        getDetailModal={getDetailModal}
+      />
     </>
   );
 };

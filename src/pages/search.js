@@ -24,7 +24,7 @@ const Search = ({ onSelected }) => {
         }));
         return { options, total_count: count };
       });
-  }
+  };
 
   const handleInputChange = (q) => {
     setQuery(q);
@@ -69,8 +69,8 @@ const Search = ({ onSelected }) => {
   }, []);
 
   const handleSelected = (res) => {
-    onSelected(res.length > 0 ? res[0].name : '')
-  }
+    onSelected(res.length > 0 ? res[0].name : "");
+  };
 
   return (
     <AsyncTypeahead

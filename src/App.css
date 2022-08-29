@@ -18,6 +18,10 @@ body {
   color: #ffcb05;
 }
 
+.text-secondary-color {
+  color: #3c7cc8;
+}
+
 .background {
   position: absolute;
   background-image: url('../public/img/background.jpg');
@@ -94,6 +98,6 @@ body {
 .thumbnail-detail {
   border: 1px solid #c1c1c1;
   padding: 30px;
-  border-radius: 10px;
+  border-radius: 5px;
   width: 100%;
 }
