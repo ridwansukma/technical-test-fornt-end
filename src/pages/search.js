@@ -16,16 +16,16 @@ const Search = ({ onSelected }) => {
   const makeAndHandleRequest = () => {
     return axios
       .get(REACT_APP_API_URL + `pokemon?limit=${100000}&offset=${0}`)
-      .then(({data : { results, count}}) => {
-          const options = results.map((item, index) => ({
-              avatar_url: baseUrl("/img/icon.png"),
-              id: index,
-              name: item.name,
-          }));
-          return { options, total_count: count };
+      .then(({ data: { results, count } }) => {
+        const options = results.map((item, index) => ({
+          avatar_url: baseUrl("/img/icon.png"),
+          id: index,
+          name: item.name,
+        }));
+        return { options, total_count: count };
       });
   }
-  
+
   const handleInputChange = (q) => {
     setQuery(q);
   };
@@ -70,7 +70,7 @@ const Search = ({ onSelected }) => {
 
   const handleSelected = (res) => {
     onSelected(res.length > 0 ? res[0].name : '')
-  } 
+  }
 
   return (
     <AsyncTypeahead
